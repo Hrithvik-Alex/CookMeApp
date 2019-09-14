@@ -1,12 +1,18 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import MainPage from './MainPage';
 
-import "tabler-react/dist/Tabler.css";
+import Typography from '@material-ui/core/Typography';
+import 'typeface-roboto';
+
+import Album from './Album';
+import Container from '@material-ui/core/Container';
 
 function App() {
   return (
-    <MainPage></MainPage>
+    <Container>
+      <Album></Album>
+    </Container>
   );
 }
 
