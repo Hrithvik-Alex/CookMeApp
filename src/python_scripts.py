@@ -12,13 +12,12 @@ def get_recipe_id(search_string):
 
 
 def get_recipe(recipe_search):
-  return requests.get(GET_ID + str(get_recipe_id(recipe_search)) + "?api_key=" + BIG_OVEN_KEY).json()
+  recipe_id = get_recipe_id(recipe_search)
+
+  requests.patch("https://cookme-d0c7d.firebaseio.com/historic_search.json", '{"' + recipe_search + '":' + str(recipe_id) + '}')
+
+  return requests.get(GET_ID + str(recipe_id) + "?api_key=" + BIG_OVEN_KEY).json()
 
 
-print(get_recipe("Lasagna").get("Instructions"))
-
-FIREBASE_KEY = "AIzaSyDjPdzcNDD2gaVMWy5ShaiH4JH8MgVXmMk"
-
-URL = 'https://cookme-d0c7d.firebaseio.com/.json?print=pretty'
-
-print(requests.get(URL).json())
+def get_historic():
+  return requests.get("https://cookme-d0c7d.firebaseio.com/historic_search.json").json()
