@@ -16,6 +16,8 @@ import Link from '@material-ui/core/Link';
 
 import TextField from '@material-ui/core/TextField';
 
+import { Input } from '@material-ui/core'
+
 import get_images from './facebook';
 import { withStyles } from '@material-ui/styles';
 
@@ -40,7 +42,7 @@ function Copyright() {
   );
 }
 
-const styles = theme => ({
+const styles = {
   icon: { 
     marginRight: '16px',
   },
@@ -60,9 +62,12 @@ const styles = theme => ({
     paddingBottom:  '64px',
   },
   card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    //display: 'flex',
+    //flexDirection: 'column',
+    overflow: 'auto',
+    overflowX: 'hidden',
+    height: '400px',
+    width: '300px',
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
@@ -80,19 +85,15 @@ const styles = theme => ({
   textField: {
     width: '100%',
   },
-});
+};
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // let instagramPosts = [];
-let hashtag = 'chinesefood';
 let dataObject;
 let r;
 
 // getImages(hashtag);
-
-
-// console.log(len)
 
  class Album extends React.Component{
   constructor() {
@@ -100,12 +101,21 @@ let r;
     this.state = {
       // classes: null,
       instagramPosts: [],
+      hashtag: "food",
+      currentInput: null,
     }
+
+    this.handlePress = this.handlePress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     // const styles = useStyles();
-    this.getImages(hashtag);
+    this.getImages(this.state.hashtag);
+
+  }
+
+  componentDidUpdate() {
 
   }
 
@@ -132,13 +142,27 @@ let r;
   });
   */
 
+  handleChange(e) {
+    this.setState({ currentInput: e.target.value });
+  }
+
+  handlePress(event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      //render again
+      this.setState({ hashtag: this.state.currentInput }, () => {
+        this.getImages(this.state.hashtag);
+      });
+    }
+  }
+
   render(){
     return (
       <React.Fragment>
         <CssBaseline />
         <AppBar position="relative">
-          <Toolbar className={styles.toolBar}>
-            <LocalDiningIcon className={styles.icon} />
+          <Toolbar className={styles.toolBar} style={styles.toolBar}>
+            <LocalDiningIcon className={styles.icon} style={styles.icon} />
             <Typography variant="h6" color="inherit" noWrap>
               Cook Me!
             </Typography>
@@ -146,8 +170,8 @@ let r;
         </AppBar>
         <main>
           {/* Hero unit */}
-          <div className={styles.heroWrapper}>
-            <div className={styles.heroContent}>
+          <div className={styles.heroWrapper} style={styles.heroWrapper}>
+            <div className={styles.heroContent} style={styles.heroContent}>
               <Container maxWidth="sm">
                 
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -158,17 +182,20 @@ let r;
                   From picture to plate in seconds.
                 </Typography>
                 
-                <TextField
+                <Input
                     id="standard-search"
                     label="What are you craving?"
                     type="search"
                     className={styles.textField}
+                    style={styles.textField}
                     margin="normal"
+                    onKeyPress={this.handlePress}
+                    onChange={this.handleChange}
                 />
               </Container>
             </div>
           </div>
-          <Container className={styles.cardGrid} maxWidth="md">
+          <Container className={styles.cardGrid} maxWidth="md" style={styles.cardGrid}>
             {/* End hero unit */}
             <Grid container spacing={4}>
 
@@ -177,13 +204,13 @@ let r;
 
                   <Grid item key={instagramPost.id} xs={12} sm={6} md={4}>
                     {/* {console.log("fuckkkk ")} */}
-                    <Card className={styles.card}>
+                    <Card className={styles.card} style={styles.card}>
                       <CardMedia
                         style={{height:0,paddingTop:'56.25%'}}
                         image={instagramPost.imageURL}
                         title="Image title"
                       />
-                      <CardContent className={styles.cardContent}>
+                      <CardContent className={styles.cardContent} style={styles.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
                         </Typography>
                         <Typography>
@@ -194,10 +221,6 @@ let r;
                         <Button size="small" color="primary">
                           View
                         </Button>
-                        <Button size="small" color="primary">
-                          Edit
-                          
-                        </Button>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -207,7 +230,7 @@ let r;
           </Container>
         </main>
         {/* Footer */}
-        <footer className={styles.footer}>
+        <footer className={styles.footer} style={styles.footer}>
           <Copyright />
         </footer>
         {/* End footer */}
