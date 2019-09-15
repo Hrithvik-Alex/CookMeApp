@@ -1,6 +1,6 @@
-const axios = require('axios').default;
+  const axios = require('axios').default;
 
-const ACCESS_TOKEN = "EAAFfZCZAyb6wwBAMovpCJMaqLwtTx5cXxLQpZAGXfNCXiXXkVABCuoMkHGl4ZCcDBlCEkZCEO5ZC3k9jyy0ueBZCl5ohfowBZC443qPkGpRjgYbfNdMApiUfePxzjs0YZC8CrFtvM2eytA0lLEHaOTyuQgcmZBV9bxirrU6OdXod77Q544lK3ifbO9pEJdisuEYsbOAZCLZAnoonGwZDZD"
+const ACCESS_TOKEN = "EAAFfZCZAyb6wwBAJEmVr7hjZBMXkZBlnfmaxPBpScaLZCqieWM5l2bN4tCM1LpzxfhqsrJEj1L4y69Kz56w6DR9xGOXniKyvkcf0XhfPclomQEZCy9btZCeZBv9vYdO9Lt22kZBjFnrSWPKrJ5IeAUO3QwHgTcT3B2XsdI08QTx6JI07upAEXw6AIh33dsHUZAIq422jZAldeXxIgZDZD";
 const USER_ID = "17841420180745805"
 
 async function get_images(hashtag) {
@@ -15,10 +15,9 @@ async function get_images(hashtag) {
         console.log(err)
       })
     
-    await axios.get("https://graph.facebook.com/"+hash_id+"/top_media?user_id="+USER_ID+"&fields=caption,media_url&access_token="+ACCESS_TOKEN) 
+    await axios.get("https://graph.facebook.com/"+hash_id+"/top_media?user_id="+USER_ID+"&fields=caption,media_url,media_type&access_token="+ACCESS_TOKEN) 
     .then(function (response) {
         r = response.data
-        console.log(response);
        }).catch(function(err) {
         console.log(err)
       })
@@ -26,4 +25,4 @@ async function get_images(hashtag) {
     return r
 }
 
-console.log(get_images("blueberry"))
+module.exports = get_images

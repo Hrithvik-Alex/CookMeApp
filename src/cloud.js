@@ -14,8 +14,8 @@ async function quickstart(gcsUri) {
     // const objects = result.localizedObjectAnnotations;
     const labels = result.labelAnnotations;
     console.log('Labels:');
-    labels.forEach(label => console.log(label.description));
+    labels.forEach(label => console.log(label));
     return labels
   }
   
-  quickstart();
+  quickstart('https://upload.wikimedia.org/wikipedia/en/4/44/SpongeBob_SquarePants_characters_promo.png');

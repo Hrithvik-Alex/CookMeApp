@@ -1,43 +1,27 @@
-const useStyles = makeStyles(theme => ({
-    icon: {
-      marginRight: theme.spacing(2),
-    },
-    heroContent: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(8, 0, 6),
-    },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
-    },
-    footer: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
-    },
-    toolBar: {
-        backgroundColor: '#e64c25',
-    },
-    textField: {
-      width: '100%',
-    },
-}));
 
-export default function Photos() {
-    const classes = useStyles();
 
-    
+class Photos extends React.Component{
+  constructor() {
+    super();
+    this.state = {
+      showIndex: false,
+      showBullets: true,
+      infinite: true,
+      showThumbnails: true,
+      showFullscreenButton: true,
+      showGalleryFullscreenButton: true,
+      showPlayButton: true,
+      showGalleryPlayButton: true,
+      showNav: true,
+      isRTL: false,
+      slideDuration: 450,
+      slideInterval: 2000,
+      slideOnThumbnailOver: false,
+      thumbnailPosition: 'bottom',
+      showVideo: {},
+    };
+
+    this.images = [];
+
+  }
 }
