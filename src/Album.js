@@ -96,12 +96,27 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 //   const [open, setOpen] = React.useState(false);
 // }
 
+function Labels(props) {
+  let recipeString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  let text;
+  if(tagClicked){
+    text = <h1>{recipeString}</h1>
+  }
+  return(
+  <div>
+    <Button size="small" color="primary" onClick={handleButtonOpen}>
+      props.label
+    </Button>
+    {text}
+  </div>
+  )
+}
+
 export default function Album() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [tagClicked, click] = React.useState(false);
 
-  let recipeString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
   //let tagClicked = false;
   //const [open, open2, setOpen, recipeOpen] = React.useState(false);
@@ -129,10 +144,7 @@ export default function Album() {
   // const closeRecipe = () => {
   //   recipeOpen(false);
   // };
-  let text;
-  if(tagClicked){
-    text = <h1>{recipeString}</h1>
-  }
+
 
   return (
     <React.Fragment>
@@ -209,10 +221,10 @@ export default function Album() {
                           <h2 id="recipe-title">Recipes:</h2>
                           <p id="transition-modal-description">react-transiton-group animates me.</p>
                           <p>more tags</p>
-                          <Button size="small" color="primary" onClick={handleButtonOpen}>
-                            banana
-                          </Button>
-                          {text}
+                          {/*<Button size="small" color="primary" onClick={handleButtonOpen}>*/}
+                          {/*  banana*/}
+                          {/*</Button>*/}
+                          {/*{text}*/}
                         </div>
                       </Fade>
                     </Modal>
