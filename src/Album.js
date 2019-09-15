@@ -14,7 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
-import TextField from '@material-ui/core/TextField';
+import Modal from "@material-ui/core/Modal";
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import RecipeImage from './logo192.png';
 
 import { Input } from '@material-ui/core'
 
@@ -26,6 +29,7 @@ class InstagramPost {
     this.caption = Caption;
     this.imageURL = ImageURL;
     this.id = id;
+
   }
 }
 
@@ -85,29 +89,156 @@ const styles = {
   textField: {
     width: '100%',
   },
+  modal: {
+    display: 'flex',
+    maxWidth: "60%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow:'auto',
+    marginLeft: "20%"
+
+  },
+  paper: {
+    backgroundColor: '#fff',
+    border: '2px solid #000',
+    boxShadow: "1",
+    padding: "16px 32px 24px",
+  },
 };
+class Label extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      recipeString: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      text: null
+    }
+    this.handleButtonOpen = this.handleButtonOpen.bind(this);
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  }
 
-// let instagramPosts = [];
-let dataObject;
-let r;
+  handleButtonOpen() {
+    //click(true);
+    this.setState({tagClicked: true,text: <h1>{this.state.recipeString}</h1>});
+    // console.log(recipeString);
+  }
+  
+  render(){
+    return(
+    <div>
+      <Button size="small" color="primary" onClick={this.handleButtonOpen}>
+        {this.props.label}
+      </Button>
+      {this.state.text}
+    </div>
+    )
+  }
+  
+}
 
-// getImages(hashtag);
+
+  class Item extends React.Component {
+    constructor(){
+      super();
+      this.state = {
+        open: false,
+        tagClicked: false,
+      }
+      this.handleOpen = this.handleOpen.bind(this);
+      this.handleClose = this.handleClose.bind(this);
+    }
+
+    handleOpen() {
+      //setOpen(true);
+      console.log("fuck off");
+      this.setState({open: true})
+    };
+  
+    handleClose() {
+      //setOpen(false);
+      this.setState({open: false})
+      //click(false);
+      this.setState({tagClicked: false});
+    };
+
+    render() {
+      return(
+        <Grid item key={this.props.post.id} xs={12} sm={6} md={4}>
+                    {/* {console.log("fuckkkk ")} */}
+                    <Card className={styles.card} style={styles.card}>
+                      <CardMedia
+                        style={{height:0,paddingTop:'56.25%'}}
+                        image={this.props.post.imageURL}
+                        title="Image title"
+                      />
+                      <CardContent className={styles.cardContent} style={styles.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                        </Typography>
+                        <Typography>
+                          {this.props.post.caption}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" color="primary" onClick={this.handleOpen}>
+                          View
+                        </Button>
+                        <Modal
+                          aria-labelledby="transition-modal-title"
+                          aria-describedby="transition-modal-description"
+                          className={styles.modal}
+                          style={styles.modal}
+                          open={this.state.open}
+                          onClose={this.handleClose}
+                          closeAfterTransition
+                          BackdropComponent={Backdrop}
+                          BackdropProps={{
+                            timeout: 500,
+                            classes: {root: {'$backgroundColor': "rgba 0 0 0 0.05"}},
+                          }}
+                        >
+                          <Fade in={this.state.open}>
+                            <div className={styles.paper} style={styles.paper}>
+                            <CardMedia
+                            style={{height:0,paddingTop:'56.25%'}}
+                            image={this.props.post.imageURL}
+                            title="Image title"
+                            />
+                
+                              <h2 id="recipe-title">Recipes:</h2>
+                              <p id="transition-modal-description">react-transiton-group animates me.</p>
+                              <p>more tags</p>
+                              <Label label="fucku"/>
+                            </div>
+                          </Fade>
+                        </Modal>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+      )
+    }
+
+  }
+
 
  class Album extends React.Component{
+
   constructor() {
     super();
     this.state = {
       // classes: null,
       instagramPosts: [],
-      hashtag: "food",
+      hashtag: "chinesefood",
       currentInput: null,
+      
     }
 
     this.handlePress = this.handlePress.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+
   }
+
+  
+ 
 
   componentDidMount() {
     // const styles = useStyles();
@@ -115,12 +246,20 @@ let r;
 
   }
 
-  componentDidUpdate() {
+  //const [open, setOpen] = React.useState(false);
+  //const [tagClicked, click] = React.useState(false);
 
-  }
+
+  //let tagClicked = false;
+  //const [open, open2, setOpen, recipeOpen] = React.useState(false);
+
+
+  
+
+  
 
   async getImages(hashTag) {
-    r = await get_images(hashTag)
+    let r = await get_images(hashTag)
     let int = 1;
     var array = []
     r.data.forEach(jsonObject => {
@@ -201,29 +340,8 @@ let r;
 
                 {this.state.instagramPosts.map(instagramPost => (
 
-
-                  <Grid item key={instagramPost.id} xs={12} sm={6} md={4}>
-                    {/* {console.log("fuckkkk ")} */}
-                    <Card className={styles.card} style={styles.card}>
-                      <CardMedia
-                        style={{height:0,paddingTop:'56.25%'}}
-                        image={instagramPost.imageURL}
-                        title="Image title"
-                      />
-                      <CardContent className={styles.cardContent} style={styles.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                        </Typography>
-                        <Typography>
-                          {instagramPost.caption}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small" color="primary">
-                          View
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
+                <Item post={instagramPost} />
+                  
                 ))}
 
             </Grid>
