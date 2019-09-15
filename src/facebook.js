@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
-const ACCESS_TOKEN = "EAAFfZCZAyb6wwBAE53dDdtR9A89eUENmusC6CpH5ew1dlsou0GVrxyAqZA1MeEUSqElLANxdyRyar5gG9dbuMiHpP4qViwNHraZCBlV1CvYo2d5NXxXGMaOLh0BWjAqMcxVQhzAmYdi7CXNRBR7PFaOVVvZAabOT1HLkesuDpH4xtcsj8gA84OdXT709cq8D3wGYckbROqQZDZD";
-const USER_ID = "17841420180745805"
+const ACCESS_TOKEN = "[get token here]";
+const USER_ID = "[place userID here]";
 
 async function get_images(hashtag) {
     var hash_id;

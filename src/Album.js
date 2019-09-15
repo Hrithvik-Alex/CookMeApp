@@ -367,7 +367,6 @@ class Label extends React.Component {
                     className={styles.textField}
                     style={styles.textField}
                     margin="normal"
-                    value="ChineseFood"
                     onKeyPress={this.handlePress}
                     onChange={this.handleChange}
                 />
