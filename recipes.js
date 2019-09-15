@@ -10,6 +10,7 @@ const FIREBASE_URL = "https://cookme-d0c7d.firebaseio.com/"
 
 async function get_recipe(search_string) {
   var recipe_id
+  var output
 
   await axios.get(BIG_URL + search_string)
   .then(function (response) {
@@ -24,21 +25,24 @@ async function get_recipe(search_string) {
     console.log(err)
   })
 
-  return await axios.get(GET_ID + recipe_id + "?api_key=" + BIG_OVEN_KEY)
+  await axios.get(GET_ID + recipe_id + "?api_key=" + BIG_OVEN_KEY).then(function (response){
+    output = response.data
+  }).catch(function(err){
+    console.log(err)
+  })
+
+  return output
 }
 
 async function get_historic(){
-  return await axios.get(FIREBASE_URL + "historic_search.json")
+  var output
+  await axios.get(FIREBASE_URL + "historic_search.json").then(function(response){
+    output = response.data
+  }).catch(function(err){
+    console.log(err)
+  })
+
+  return output
 }
 
-get_recipe("Lasagna").then(function (response){
-    console.log(response.data)
-  }).catch(function(err){
-    console.log(err)
-  })
-
-get_historic().then(function(response){
-    console.log(response.data)
-  }).catch(function(err){
-    console.log(err)
-  })
+module.exports = get_recipe
