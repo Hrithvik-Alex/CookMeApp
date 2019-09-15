@@ -171,7 +171,6 @@ class Label extends React.Component {
 
     handleOpen() {
       //setOpen(true);
-      console.log("fuck off");
       this.setState({open: true})
     };
   
@@ -368,6 +367,7 @@ class Label extends React.Component {
                     className={styles.textField}
                     style={styles.textField}
                     margin="normal"
+                    value="ChineseFood"
                     onKeyPress={this.handlePress}
                     onChange={this.handleChange}
                 />
