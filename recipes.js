@@ -24,12 +24,7 @@ async function get_recipe(search_string) {
     console.log(err)
   })
 
-  await axios.get(GET_ID + recipe_id + "?api_key=" + BIG_OVEN_KEY)
-  .then(function (response){
-    console.log(response.data)
-  }).catch(function(err){
-    console.log(err)
-  })
+  return await axios.get(GET_ID + recipe_id + "?api_key=" + BIG_OVEN_KEY)
 }
 
 async function get_historic(){
@@ -39,6 +34,12 @@ async function get_historic(){
   }).catch(function(err){
     console.log(err)
   })
+
+  return(response.data)
 }
 
-get_recipe("Lasagna")
+get_recipe("Lasagna").then(function (response){
+    console.log(response.data)
+  }).catch(function(err){
+    console.log(err)
+  })
