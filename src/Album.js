@@ -23,7 +23,7 @@ import RecipeImage from './logo192.png';
 import { Input } from '@material-ui/core'
 
 import get_images from './facebook';
-
+import get_recipe from './recipes';
 import { withStyles } from '@material-ui/styles';
 // let quickstart = require('./cloud');
 
@@ -107,12 +107,12 @@ const styles = {
   },
   modal: {
     display: 'flex',
-    maxWidth: "60%",
+    maxWidth: "50%",
     alignItems: 'center',
     justifyContent: 'center',
     overflow:'auto',
-    marginLeft: "20%",
-    minWidth: '400px'
+    marginLeft: "25%",
+    // maxWidth: '60%'
 
   },
   paper: {
@@ -135,9 +135,12 @@ class Label extends React.Component {
 
   handleButtonOpen() {
     //click(true);
-    this.setState({tagClicked: true,text: <h1>{this.state.recipeString}</h1>});
+    console.log(this.props.recipe)
+    this.setState({tagClicked: true,text: <p>{this.props.recipe}</p>});
     // console.log(recipeString);
   }
+
+
   
   render(){
     return(
@@ -158,7 +161,9 @@ class Label extends React.Component {
       super();
       this.state = {
         open: false,
-        labels: []
+        labels: [],
+        recipes: []
+
       }
       this.handleOpen = this.handleOpen.bind(this);
       this.handleClose = this.handleClose.bind(this);
@@ -179,10 +184,15 @@ class Label extends React.Component {
 
     async getLabels() {
       var labelbois = await axios.get('http://localhost:4000/json?img=' + encodeURIComponent(this.props.post.imageURL))
-      console.log(labelbois)
-      this.setState({labels: labelbois.data})
+      var recipes = []
+      labelbois.data.map(async function(data) {
+        let fuck = await get_recipe(data.description)
+        recipes.push(fuck)
+      })
+      this.setState({labels: labelbois.data, recipes: recipes})
       
     }
+
 
     componentDidMount() {
       this.getLabels()
@@ -232,8 +242,8 @@ class Label extends React.Component {
                             />
                 
                               <h2 id="recipe-title">Top Hits:</h2>
-                              {this.state.labels.map(labelboi => (
-                                <Label label={labelboi.description}/>
+                              {this.state.labels.map((labelboi,i) => (
+                                <Label label={labelboi.description} recipe={this.state.recipes[i]}/>
                               
                               ))
                               }

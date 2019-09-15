@@ -8,26 +8,34 @@ const GET_ID = "http://api2.bigoven.com/recipe/"
 
 const FIREBASE_URL = "https://cookme-d0c7d.firebaseio.com/"
 
-async function get_recipe(search_string) {
+export default async function get_recipe(search_string) {
   var recipe_id
   var output
-
   await axios.get(BIG_URL + search_string)
   .then(function (response) {
+    if(response.data.Results.length == 0) {
+      return "no recipe avaliable.1"
+
+    }
    recipe_id = response.data.Results[0].RecipeID
   }).catch(function(err) {
-   console.log(err)
-  })
-
-  await axios.patch(FIREBASE_URL + "historic_search.json", {search_string: recipe_id})
-  .then(function (response) {
-  }).catch(function(err) {
+    return "no recipe avaliable.2"
     console.log(err)
   })
 
+  // await axios.patch(FIREBASE_URL + "historic_search.json", {search_string: recipe_id})
+  // .then(function (response) {
+  // }).catch(function(err) {
+  //   console.log(err)
+  // })
+  if(recipe_id == undefined){
+    return "no recipe available.3"
+  }
+
   await axios.get(GET_ID + recipe_id + "?api_key=" + BIG_OVEN_KEY).then(function (response){
-    output = response.data
+    output = response.data.Instructions
   }).catch(function(err){
+    return "no recipe available.4"
     console.log(err)
   })
 
@@ -45,4 +53,4 @@ async function get_historic(){
   return output
 }
 
-module.exports = get_recipe
+// module.exports = get_recipe
