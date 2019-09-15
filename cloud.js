@@ -1,5 +1,3 @@
-
-
 async function quickstart(gcsUri) {
     const vision = require('@google-cloud/vision');
 
@@ -9,13 +7,13 @@ async function quickstart(gcsUri) {
     /**
      * TODO(developer): Uncomment the following line before running the sample.
      */
-    // const gcsUri = `https://www.eatright.org/-/media/eatrightimages/food/nutrition/nutritionfactsandfoodlabels/sodium-salt-1083487948.jpg`;
+        // const gcsUri = `https://www.eatright.org/-/media/eatrightimages/food/nutrition/nutritionfactsandfoodlabels/sodium-salt-1083487948.jpg`;
     const [result] = await client.labelDetection(gcsUri);
     // const objects = result.localizedObjectAnnotations;
     const labels = result.labelAnnotations;
     console.log('Labels:');
     labels.forEach(label => console.log(label.description));
     return labels
-  }
-  
-  quickstart();
+}
+
+quickstart('https://ichef.bbci.co.uk/news/660/cpsprodpb/3DAD/production/_104898751_gettyimages-844466808.jpg');

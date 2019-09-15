@@ -17,6 +17,10 @@ import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 
 import Slide from '@material-ui/core/Slide';
+import Modal from "@material-ui/core/Modal";
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import RecipeImage from '/Users/michaelqin/CookMeApp/src/logo192.png';
 
 function Copyright() {
   return (
@@ -67,12 +71,61 @@ const useStyles = makeStyles(theme => ({
   textField: {
     width: '100%',
   },
+  modal: {
+    display: 'flex',
+    maxWidth: "60%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: "20%"
+
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+
+//   export default function RecipeInfo() {
+//   const classes = useStyles();
+//   const [open, setOpen] = React.useState(false);
+// }
+
 export default function Album() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [tagClicked, click] = React.useState(false);
+
+  //let tagClicked = false;
+  //const [open, open2, setOpen, recipeOpen] = React.useState(false);
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleButton = () => {
+    click(true);
+    console.log("clicked");
+  }
+
+  // const openRecipe = () => {
+  //   //setOpen(false);
+  //   recipeOpen(true);
+  // };
+  //
+  // const closeRecipe = () => {
+  //   recipeOpen(false);
+  // };
+
 
   return (
     <React.Fragment>
@@ -127,9 +180,61 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={handleOpen}>
                       View
                     </Button>
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                          timeout: 500,
+                        }}
+                    >
+                      <Fade in={open}>
+                        <div className={classes.paper}>
+                          <img src={RecipeImage} alt="Lasagna">
+                          </img>
+                          <h2 id="recipe-title">Recipes:</h2>
+                          <p id="transition-modal-description">react-transiton-group animates me.</p>
+                          <p>more tags</p>
+                          <Button size="small" color="primary" onClick={handleButton}>
+                            banana
+                          </Button>
+
+                          {tagClicked ? <h1>test</h1> : null}
+
+                        </div>
+                      </Fade>
+                    </Modal>
+
+                    {/*<Modal*/}
+                    {/*    aria-labelledby="recipe-modal"*/}
+                    {/*    aria-describedby="recipe-modal-description"*/}
+                    {/*    className={classes.modal}*/}
+                    {/*    open={false}*/}
+                    {/*    onClose={closeRecipe}*/}
+                    {/*    closeAfterTransition*/}
+                    {/*    BackdropComponent={Backdrop}*/}
+                    {/*    BackdropProps={{*/}
+                    {/*      timeout: 500,*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*  <Fade in={open2}>*/}
+                    {/*    <div className={classes.paper}>*/}
+                    {/*      <img src={RecipeImage} alt="Lasagna">*/}
+                    {/*      </img>*/}
+                    {/*      <h2 id="recipe-title">Recipe</h2>*/}
+                    {/*      <p id="recipe-modal-description">react-transiton-group animates me.</p>*/}
+                    {/*      <p>more tags</p>*/}
+                    {/*    </div>*/}
+                    {/*  </Fade>*/}
+                    {/*</Modal>*/}
+
                     <Button size="small" color="primary">
                       Edit
                     </Button>
