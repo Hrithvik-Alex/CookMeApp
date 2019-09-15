@@ -28,17 +28,16 @@ async function get_recipe(search_string) {
 }
 
 async function get_historic(){
-  await axios.get(FIREBASE_URL + "historic_search.json")
-  .then(function(response){
+  return await axios.get(FIREBASE_URL + "historic_search.json")
+}
+
+get_recipe("Lasagna").then(function (response){
     console.log(response.data)
   }).catch(function(err){
     console.log(err)
   })
 
-  return(response.data)
-}
-
-get_recipe("Lasagna").then(function (response){
+get_historic().then(function(response){
     console.log(response.data)
   }).catch(function(err){
     console.log(err)
