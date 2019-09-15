@@ -1,15 +1,12 @@
+import vision from '@google-cloud/vision';
+
+// const vision = require();
 
 
 async function quickstart(gcsUri) {
-    const vision = require('@google-cloud/vision');
-
-    // Creates a client
+    
     const client = new vision.ImageAnnotatorClient();
 
-    /**
-     * TODO(developer): Uncomment the following line before running the sample.
-     */
-    // const gcsUri = `https://www.eatright.org/-/media/eatrightimages/food/nutrition/nutritionfactsandfoodlabels/sodium-salt-1083487948.jpg`;
     const [result] = await client.labelDetection(gcsUri);
     // const objects = result.localizedObjectAnnotations;
     const labels = result.labelAnnotations;
@@ -18,4 +15,6 @@ async function quickstart(gcsUri) {
     return labels
   }
   
-  quickstart('https://upload.wikimedia.org/wikipedia/en/4/44/SpongeBob_SquarePants_characters_promo.png');
+  // quickstart('https://upload.wikimedia.org/wikipedia/en/4/44/SpongeBob_SquarePants_characters_promo.png');
+
+  // module.exports = quickstart

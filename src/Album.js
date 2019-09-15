@@ -13,16 +13,32 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-
+import axios from 'axios';
 import Modal from "@material-ui/core/Modal";
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import RecipeImage from './logo192.png';
+// import vision from '';
 
 import { Input } from '@material-ui/core'
 
 import get_images from './facebook';
+
 import { withStyles } from '@material-ui/styles';
+// let quickstart = require('./cloud');
+
+
+async function quickstart(gcsUri) {
+  const vision = require('@google-cloud/vision');
+  console.log(vision);
+  const client = new vision.ImageAnnotatorClient();
+  const [result] = await client.labelDetection(gcsUri);
+  // const objects = result.localizedObjectAnnotations;
+  const labels = result.labelAnnotations;
+  console.log('Labels:');
+  labels.forEach(label => console.log(label));
+  return labels
+}
 
 class InstagramPost {
   constructor(Caption, ImageURL, id) {
@@ -95,7 +111,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     overflow:'auto',
-    marginLeft: "20%"
+    marginLeft: "20%",
+    minWidth: '400px'
 
   },
   paper: {
@@ -141,7 +158,7 @@ class Label extends React.Component {
       super();
       this.state = {
         open: false,
-        tagClicked: false,
+        labels: []
       }
       this.handleOpen = this.handleOpen.bind(this);
       this.handleClose = this.handleClose.bind(this);
@@ -159,6 +176,17 @@ class Label extends React.Component {
       //click(false);
       this.setState({tagClicked: false});
     };
+
+    async getLabels() {
+      var labelbois = await axios.get('http://localhost:4000/json?img=' + encodeURIComponent(this.props.post.imageURL))
+      console.log(labelbois)
+      this.setState({labels: labelbois.data})
+      
+    }
+
+    componentDidMount() {
+      this.getLabels()
+    }
 
     render() {
       return(
@@ -203,10 +231,12 @@ class Label extends React.Component {
                             title="Image title"
                             />
                 
-                              <h2 id="recipe-title">Recipes:</h2>
-                              <p id="transition-modal-description">react-transiton-group animates me.</p>
-                              <p>more tags</p>
-                              <Label label="fucku"/>
+                              <h2 id="recipe-title">Top Hits:</h2>
+                              {this.state.labels.map(labelboi => (
+                                <Label label={labelboi.description}/>
+                              
+                              ))
+                              }
                             </div>
                           </Fade>
                         </Modal>
