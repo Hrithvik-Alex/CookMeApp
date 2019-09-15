@@ -76,6 +76,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "60%",
     alignItems: 'center',
     justifyContent: 'center',
+    overflow:'scroll',
     marginLeft: "20%"
 
   },
@@ -100,6 +101,8 @@ export default function Album() {
   const [open, setOpen] = React.useState(false);
   const [tagClicked, click] = React.useState(false);
 
+  let recipeString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
   //let tagClicked = false;
   //const [open, open2, setOpen, recipeOpen] = React.useState(false);
 
@@ -110,11 +113,12 @@ export default function Album() {
 
   const handleClose = () => {
     setOpen(false);
+    click(false);
   };
 
-  const handleButton = () => {
+  const handleButtonOpen = () => {
     click(true);
-    console.log("clicked");
+    console.log(recipeString);
   }
 
   // const openRecipe = () => {
@@ -125,7 +129,10 @@ export default function Album() {
   // const closeRecipe = () => {
   //   recipeOpen(false);
   // };
-
+  let text;
+  if(tagClicked){
+    text = <h1>{recipeString}</h1>
+  }
 
   return (
     <React.Fragment>
@@ -202,12 +209,10 @@ export default function Album() {
                           <h2 id="recipe-title">Recipes:</h2>
                           <p id="transition-modal-description">react-transiton-group animates me.</p>
                           <p>more tags</p>
-                          <Button size="small" color="primary" onClick={handleButton}>
+                          <Button size="small" color="primary" onClick={handleButtonOpen}>
                             banana
                           </Button>
-
-                          {tagClicked ? <h1>test</h1> : null}
-
+                          {text}
                         </div>
                       </Fade>
                     </Modal>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62578818-af01-435e-8797-3b2dc574d83f" name="Default Changelist" comment="" />
+    <list default="true" id="62578818-af01-435e-8797-3b2dc574d83f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Album.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Album.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -54,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Album.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1619">
-              <caret line="235" column="34" selection-start-line="235" selection-start-column="34" selection-end-line="235" selection-end-column="34" />
+            <state relative-caret-position="229">
+              <caret line="133" column="28" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -216,12 +218,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568480202965</updated>
-      <workItem from="1568480204036" duration="16706000" />
+      <workItem from="1568480204036" duration="19011000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16706000" />
+    <option name="totallyTimeSpent" value="19011000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -234,6 +236,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="29" y="25" width="1337" height="766" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
@@ -332,8 +335,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Album.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1619">
-          <caret line="235" column="34" selection-start-line="235" selection-start-column="34" selection-end-line="235" selection-end-column="34" />
+        <state relative-caret-position="229">
+          <caret line="133" column="28" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
