@@ -1,4 +1,7 @@
 ### CookMe!
+
+![](docs/CookMeApp.jpg)
+
 ***Contributors:*** *Hansson Lin, Hrithvik Alex, Eddy Yao, Michael Qin*
 
 CookMe lets users search through millions of online photos and captions. Users will then be able to select an image of food which piques their interest, after which CookMe will prompt them with several possible recipe search options. They will then be able to select from these recipes to view detailed prep instructions, ingredients lists, and nutritional information about the selected recipes.
